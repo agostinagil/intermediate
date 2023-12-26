@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Raleway:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Intermedio</title>
+  </head>
+  <body>
+    <header>
+      <h1>Intermedio</h1>
+      <ul class="header-ul">
+        <li><a href="#rules">Reglas</a></li>
+        <li><a href="#game">Jugar</a></li>
+      </ul>
+    </header>
+    <section class="board-game" id="game">
+      <button class="play">Jugar</button>
+      <div class="desk">
+        <div class="dealer-cards"><h3>Dealer:</h3></div>
+        <div class="player-cards"><h3>You:</h3></div>
+      </div>
+      <div class="game-buttons">
+        <button class="intermediate" disabled>Intermedio</button>
+        <button class="notIntermediate" disabled>No intermedio</button>
+        <button class="newGame">Juego nuevo</button>
+      </div>
+      <h4 class="results"></h4>
+    </section>
+    <section class="rules" id="rules">
+      <h2>Reglas del intermedio</h2>
+      <p>
+        Al hacer click en el botón <b>jugar</b>, el jugador recibirá dos cartas.
+        Luego de ver sus cartas, el jugador puede "apostar" haciendo click en el
+        botón <b>es intermedio</b> si piensa que la tercer carta que le tocará
+        estará entre medio de las dos cartas anteriores, o por si no será
+        intermedio haciendo click en el botón <b>no es intermedio</b>.
+      </p>
+      <p>
+        Por ejemplo, si al jugador le tocó un 2-H y un 9-D las chances de que le
+        toque una carta intermedia son altas.
+      </p>
+      <p>
+        El mazo de cartas va desde el <b>A</b> en valor de 1 hasta el <b>10</b>.
+      </p>
+      <h5>IMPORTANTE</h5>
+      <p>
+        <b>
+          Si la tercer carta es del mismo valor que alguna de las dos cartas
+          anteriores, el jugador pierde la partida.
+        </b>
+      </p>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>
