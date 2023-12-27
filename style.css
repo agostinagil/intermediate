@@ -151,6 +151,11 @@ header h1 {
   pointer-events: none;
 }
 
+.results {
+  color: var(--main-color);
+  margin: 1rem auto;
+}
+
 /*************** RULES ***************/
 
 .rules {
