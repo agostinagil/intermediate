@@ -162,8 +162,10 @@ header h1 {
 
 .rules {
   width: 80%;
-  margin: 10rem auto;
+  margin: 0 auto;
   color: var(--fourth-color);
+  padding-top: 8vh;
+  min-height: 100vh;
 }
 
 .rules h2 {
@@ -186,6 +188,16 @@ header h1 {
   display: none;
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color);
+  color: var(--second-color);
+  height: 8rem;
+  margin: 0;
+}
+
 @media screen and (max-width: 768px) {
   .header h1 {
     font-size: 1.25rem;
@@ -196,15 +208,13 @@ header h1 {
   }
 
   .play {
-    width: auto;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    width: 20%;
+    margin-top: 0.8rem;
     font-size: 1rem;
   }
 
   .play:hover {
-    font-size: 1.2rem;
-    width: auto;
+    transform: scale(1.2);
   }
 
   .board-game {
@@ -213,6 +223,7 @@ header h1 {
 
   .desk {
     width: 90%;
+    margin-top: 0.8rem;
   }
 
   .card {
@@ -228,16 +239,12 @@ header h1 {
   }
 
   .game-buttons button:hover {
-    padding: 0.6rem;
-  }
-
-  .game-buttons button[disabled]:hover {
-    width: 5rem;
-    margin: 0.7rem;
-    padding: 0.4rem;
+    transform: scale(1.1);
   }
 
   .results {
     font-size: 1rem;
+    text-align: center;
+    padding: 0 1rem;
   }
 }
