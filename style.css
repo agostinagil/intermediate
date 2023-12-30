@@ -77,7 +77,9 @@ header h1 {
 .board-game {
   display: flex;
   flex-direction: column;
-  margin: 10vh auto;
+  margin: 0 auto;
+  padding-top: 10vh;
+  min-width: 100vh;
 }
 
 .play {

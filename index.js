@@ -6,23 +6,34 @@ const $playerBoard = d.querySelector(".player-cards"),
   $inBetweenBtn = d.querySelector(".inBetween"),
   $notInBetweenBtn = d.querySelector(".notInBetween"),
   $newGameBtn = d.querySelector(".newGame"),
-  $results = d.querySelector(".results");
+  $results = d.querySelector(".results"),
+  $backCard = d.createElement("img"),
+  $thirdCard = d.createElement("img");
+
+$backCard.src = `./cards/BACK.png`;
+$backCard.classList.add("card", "hidden");
+$dealerBoard.append($backCard);
 
 d.addEventListener("click", (e) => {
   if (e.target == $playBtn) {
     createDeck();
     shuffle();
     startGame();
+    $backCard.classList.remove("hidden");
     $playBtn.classList.add("hidden");
   }
   if (e.target == $inBetweenBtn) {
-    inBetween();
+    $backCard.classList.add("hidden");
+    $thirdCard.classList.remove("hidden");
+    between(e);
     $inBetweenBtn.disabled = true;
     $notInBetweenBtn.disabled = true;
   }
 
   if (e.target == $notInBetweenBtn) {
-    notInBetween();
+    $backCard.classList.add("hidden");
+    $thirdCard.classList.remove("hidden");
+    between(e);
     $inBetweenBtn.disabled = true;
     $notInBetweenBtn.disabled = true;
   }
@@ -31,8 +42,8 @@ d.addEventListener("click", (e) => {
     console.clear();
     createDeck();
     shuffle();
+    $thirdCard.classList.add("hidden");
     $playerBoard.textContent = "";
-    $dealerBoard.textContent = "";
     $results.textContent = "";
     playerCards = [];
 
@@ -40,6 +51,8 @@ d.addEventListener("click", (e) => {
     $notInBetweenBtn.disabled = true;
 
     setTimeout(() => {
+      $backCard.classList.remove("hidden");
+
       startGame();
     }, 1000);
   }
@@ -68,12 +81,6 @@ const shuffle = () => {
 };
 
 const startGame = () => {
-  let $backCard = d.createElement("img");
-  $backCard.src = `./cards/BACK.png`;
-  $backCard.classList.add("card");
-  $dealerBoard.append($backCard);
-  // console.log("hidden card", hiddenCard);
-
   for (let i = 0; i < 2; i++) {
     let card = deck.pop();
     let value = getValue(card);
@@ -100,7 +107,42 @@ const getValue = (card) => {
   }
 };
 
-const inBetween = () => {
+const between = (e) => {
+  let hiddenCard = deck.pop();
+  // $thirdCard = d.createElement("img");
+  $thirdCard.src = `./cards/${hiddenCard}.png`;
+  $thirdCard.classList.add("card");
+  $dealerBoard.append($thirdCard);
+  let data = hiddenCard.split("-"),
+    value = data[0].trim(),
+    checkedValue = getValue(value);
+  playerCards.sort((a, b) => a - b);
+
+  if (e.target == $inBetweenBtn) {
+    if (playerCards.includes(checkedValue)) {
+      $results.textContent = `El valor (${checkedValue}) de la tercer carta es igual a un valor de tus cartas. Perdiste`;
+      console.log("no es intermedio");
+    } else if (checkedValue > playerCards[0] && checkedValue < playerCards[1]) {
+      $results.textContent = `El valor (${checkedValue}) de la tercer carta es intermedio entre tus dos cartas. Felicitaciones!`;
+      console.log(`La carta ${checkedValue} es intermedio`);
+    } else {
+      $results.textContent = `El valor (${checkedValue}) de la tercer carta no es intermedio entre tus dos cartas. Perdiste!`;
+    }
+  }
+  if (e.target == $notInBetweenBtn) {
+    if (playerCards.includes(checkedValue)) {
+      $results.textContent = `El valor (${checkedValue}) de la tercer carta es igual a un valor de tus cartas. Ganaste`;
+      console.log("no es intermedio");
+    } else if (checkedValue > playerCards[0] && checkedValue < playerCards[1]) {
+      $results.textContent = `El valor (${checkedValue}) de la tercer carta es intermedio entre tus dos cartas. Perdiste!`;
+      console.log(`La carta ${checkedValue} es intermedio`);
+    } else {
+      $results.textContent = `El valor (${checkedValue}) de la tercer carta no es intermedio entre tus dos cartas. Ganaste!`;
+    }
+  }
+};
+
+/*const inBetween = () => {
   let hiddenCard = deck.pop();
   let $thirdCard = d.createElement("img");
   $thirdCard.src = `./cards/${hiddenCard}.png`;
@@ -116,18 +158,17 @@ const inBetween = () => {
   console.log(num);
 
   if (playerCards.includes(checkedValue)) {
-    $results.textContent = `El valor (${checkedValue}) de la tercer carta es igual a un valor de tus cartas`;
+    $results.textContent = `El valor (${checkedValue}) de la tercer carta es igual a un valor de tus cartas. Perdiste`;
     console.log("no es intermedio");
-  }
-  if (num > playerCards[0] && num < playerCards[1]) {
+  } else if (num > playerCards[0] && num < playerCards[1]) {
     $results.textContent = `El valor (${checkedValue}) de la tercer carta es intermedio entre tus dos cartas. Felicitaciones!`;
     console.log(`La carta ${num} es intermedio`);
   } else {
     $results.textContent = `El valor (${checkedValue}) de la tercer carta no es intermedio entre tus dos cartas. Perdiste!`;
   }
-};
+}; */
 
-const notInBetween = () => {
+/*const notInBetween = () => {
   let hiddenCard = deck.pop();
   let $thirdCard = d.createElement("img");
   $thirdCard.src = `./cards/${hiddenCard}.png`;
@@ -140,27 +181,14 @@ const notInBetween = () => {
   console.log(playerCards);
 
   let num = parseInt(checkedValue);
-  console.log(num);
 
   if (playerCards.includes(checkedValue)) {
     $results.textContent = `El valor (${checkedValue}) de la tercer carta es igual a un valor de tus cartas. Ganaste`;
     console.log("no es intermedio");
-  }
-  if (num > playerCards[0] && num < playerCards[1]) {
+  } else if (num > playerCards[0] && num < playerCards[1]) {
     $results.textContent = `El valor (${checkedValue}) de la tercer carta es intermedio entre tus dos cartas. Perdiste!`;
     console.log(`La carta ${num} es intermedio`);
   } else {
     $results.textContent = `El valor (${checkedValue}) de la tercer carta no es intermedio entre tus dos cartas. Ganaste!`;
   }
-};
-
-/*
-   Por hacer: 
-   - una vez ejecutada la función, que la carta "BACK" se oculte y que se muestre la hiddenCard. 
-
-   - ver de unificar el codigo de las funciones inbetween y notinbetween para no repetir código, pero que se muestren mensajes distintos
-
-   Idea función:
-
-
-*/
+};*/
