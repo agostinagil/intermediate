@@ -79,7 +79,7 @@ header h1 {
   flex-direction: column;
   margin: 0 auto;
   padding-top: 10vh;
-  min-width: 100vh;
+  min-height: 100vh;
 }
 
 .play {
@@ -184,4 +184,60 @@ header h1 {
 .hidden {
   opacity: 0;
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header h1 {
+    font-size: 1.25rem;
+  }
+
+  .header-ul li a {
+    font-size: 0.9rem;
+  }
+
+  .play {
+    width: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .play:hover {
+    font-size: 1.2rem;
+    width: auto;
+  }
+
+  .board-game {
+    padding-top: 8vh;
+  }
+
+  .desk {
+    width: 90%;
+  }
+
+  .card {
+    width: 70px;
+    height: auto;
+    margin: 0 0.2rem;
+  }
+
+  .game-buttons button {
+    width: 6rem;
+    margin: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .game-buttons button:hover {
+    padding: 0.6rem;
+  }
+
+  .game-buttons button[disabled]:hover {
+    width: 5rem;
+    margin: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .results {
+    font-size: 1rem;
+  }
 }

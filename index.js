@@ -21,6 +21,7 @@ d.addEventListener("click", (e) => {
     startGame();
     $backCard.classList.remove("hidden");
     $playBtn.classList.add("hidden");
+    $newGameBtn.disabled = false;
   }
   if (e.target == $inBetweenBtn) {
     $backCard.classList.add("hidden");
